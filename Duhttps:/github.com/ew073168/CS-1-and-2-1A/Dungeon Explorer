@@ -20,6 +20,46 @@ def game():
     tm.sleep(1)
     print()
 
+    def gameover():
+      print("Game Over")
+      print()
+      tm.sleep(1)
+      print("Final Inventory: ", end = " ")
+      for item in inventory:
+        print(item, end = " ")
+      print()
+      print()
+      tm.sleep(1)
+      print("Final Money: ", money)
+
+    def bag():
+      print("You found a bag of money.")
+      print()
+      tm.sleep(1)
+      grab = input("Do you want to find out how much it is? ")
+      print()
+      if(grab == "y" or grab == "Y"):
+        poison = random.randrange(50)
+        if(poison == 0):
+          print("You open the bag of money, but it is actually full of poison.")
+          print()
+          tm.sleep(1)
+          print("You died.")
+          print()
+          tm.sleep(1)
+          gameover()
+        else:
+          coin = random.randrange(250)
+          print("You open the money bag and find ", coin, " coins inside.")
+          print()
+          tm.sleep(1)
+          print("You add them to your inventory.")
+          print()
+          tm.sleep(1)
+          money = money + coin
+          print(money)
+          
+
     #what happens if the direction is north
     if(direction == "n" or direction == "N"):
       print("Traveling north...")
@@ -71,15 +111,7 @@ def game():
         print("You leave the dungeon.")
         print()
         tm.sleep(1)
-        print("Game Over")
-        print()
-        tm.sleep(1)
-        print("Final Inventory: ", end = " ")
-        for item in inventory:
-          print(item, end = " ")
-        print()
-        tm.sleep(1)
-        print("Final Money: ", money)
+        gameover()
         break
 
       elif(find1 == 7 or find1 == 8):
@@ -105,16 +137,8 @@ def game():
               print("You try to kill the goblin with your sword, but it also has a sword and turns ar ound and kills you.")
               print()
               tm.sleep(1)
-              print("Game Over")
-              print()
-              tm.sleep(1)
-              print("Final Inventory: ", end = " ")
-              for item in inventory:
-                print(item, end = " ")
-              print()
-              tm.sleep(1)
-              print("Final Money: ", money)
-              break
+              gameover()
+              break 
 
             else:
               print("You kill the goblin with your sword.")
@@ -144,6 +168,30 @@ def game():
           print()
           tm.sleep(1)
 
+      #what happens if you go south
+    elif(direction == "s" or direction == "S"):
+      print("Traveling south...")
+      print()
+      tm.sleep(1)
+      find2 = random.randrange(30)
+
+      if(find2 == 0 or find2 == 1):
+        coin = random.randrange(150)
+        print("You found a bag of money.")     
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to find out how much money it is? y/n ")
+        print()
+
+        if(grab == "y" or grab == "Y"):
+          print("You find ", coin, " coins in the bag and add it to your money.")
+          print()
+          money = money + coin       
+          print("Money: ", money)
+          print()
+          
+        elif(grab == "n" or grab == "N"):
+          print("You leave the bag of coins there.")
 
 
 game()
