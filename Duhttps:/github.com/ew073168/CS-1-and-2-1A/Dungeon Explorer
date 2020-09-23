@@ -2,196 +2,646 @@
 print("Dungeon Explorer")
 print()
 
+
 #importing stuff
 import random
 
 import time as tm
 
+tm.sleep(1)
+rules = input("Press r to see the rules. Otherwise, press any key.  ")
+print()
+
+#showing rules and options to new players
+if(rules == "r" or rules == "R"):
+  print("You are exploring a dungeon.")
+  print()
+  tm.sleep(2)
+  print("When the instructions prompt, You will need to choose a direction. ")
+  print()
+  tm.sleep(2)
+  print("You may choose: n,s,e,w,i. ")
+  print()
+  tm.sleep(2)
+  print("N makes you travel north.")
+  print()
+  print("S makes you travel south.")
+  print()
+  print("E makes you travel east.")
+  print()
+  print("W makes you travel west.")
+  print()
+  print("If you press i, you will check your inventory.")
+  print()
+  tm.sleep(5)
+  print("When asked any question, just answer y or n.")
+  print()
+  tm.sleep(2)
+  print("Your goal is to collect the most amount of coins and survive long.")
+  print()
+  tm.sleep(2)
+  print("You will face many dangers in the dungeon.")
+  print()
+  tm.sleep(2)
+  print("You may also find many treasures in the dungeon.")
+  print()
+  tm.sleep(2)
+  cont = input("Now, are you ready to brave the dangers? ")
+  if(cont == "n" or cont == "N"):
+    print("Well, you are going in anyway.")
+  else:
+    print("Let's go.")
+
+  print()
+
 #defining the function
 def game():
 
-  #defining variables used
+  #defining global variables
   inventory = []
   money = 0
 
   while(True):
     #direction to go
-    direction = input("Which direction do you choose to go? (n,s,e,w,i) ")
-    tm.sleep(1)
+    direction = input("Which direction do you choose to go? ")
     print()
+    tm.sleep(1)
 
+    #function to call whenever you die or end the game
     def gameover():
       print("Game Over")
       print()
       tm.sleep(1)
-      print("Final Inventory: ", end = " ")
+      print("Final Inventory: ")
       for item in inventory:
-        print(item, end = " ")
-      print()
-      print()
-      tm.sleep(1)
-      print("Final Money: ", money)
-
-    def bag():
-      print("You found a bag of money.")
+        print(item)
       print()
       tm.sleep(1)
-      grab = input("Do you want to find out how much it is? ")
-      print()
-      if(grab == "y" or grab == "Y"):
-        poison = random.randrange(50)
-        if(poison == 0):
-          print("You open the bag of money, but it is actually full of poison.")
-          print()
-          tm.sleep(1)
-          print("You died.")
-          print()
-          tm.sleep(1)
-          gameover()
-        else:
-          coin = random.randrange(250)
-          print("You open the money bag and find ", coin, " coins inside.")
-          print()
-          tm.sleep(1)
-          print("You add them to your inventory.")
-          print()
-          tm.sleep(1)
-          money = money + coin
-          print(money)
-          
+      print("Final Purse: ", money)
 
-    #what happens if the direction is north
+    find = random.randrange(4)
+
+    #items specific to direction north
     if(direction == "n" or direction == "N"):
       print("Traveling north...")
-      tm.sleep(1)
       print()
-      find1 = random.randrange(30)
+      tm.sleep(1)
 
-      #things you can randomly find
-      if(find1 == 0 or find1 == 1):
+      if(find < 5):
         print("You found a sword.")
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to add it to your inventory? ")
+        print()
+
+        if(grab == "y" or grab == "Y"):
+          print("You add the sword to your inventory.")
+          print()
+          inventory.append("Sword")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
+          print()
+          tm.sleep(1)
+
+        else:
+          print("You leave the sword there.")
+          print()
+          tm.sleep(1)
+
+      elif(find == 6):
+        print("YOU FOUND A LEGENDARY SWORD!")
         print()
         tm.sleep(1)
         grab = input("Do you want to add it to your inventory? y/n ")
         print()
 
         if(grab == "y" or grab == "Y"):
-          inventory.append("Sword")
+          print("You add the Legendary Sword to your inventory.")
+          print()
+          inventory.append("Legendary-Sword")
           tm.sleep(1)
-          print("Inventory: ", end = " ")
+          print("Inventory: ")
           for item in inventory:
-            print(item, end = " ")
-          print()
-
-        else:
-          print("You leave the sword there.")
-
-      elif(find1 == 2 or find1 == 3 or find1 == 4):
-        print("You found a bag of money.")
-        tm.sleep(1)
-        print()
-        grab = input("Do you want to find out how much money it is? y/n ")
-        print()
-        tm.sleep(1)
-
-        if(grab == "y" or grab == "Y"):
-          coin = random.randrange(100)
-          print("You find ", coin, " coins in the bag and add it to your money.")
-          money = money + coin
-          print()
-          tm.sleep(1)
-          print("Money: ", money)
+            print("   ",item)
           print()
           tm.sleep(1)
 
         else:
-          print("You leave the bag of money there.")
-
-      elif(find1 == 5 or find1 == 6):
-        print("You leave the dungeon.")
-        print()
-        tm.sleep(1)
-        gameover()
-        break
-
-      elif(find1 == 7 or find1 == 8):
-        print("You find a goblin.")
-        print()
-        tm.sleep(1)
-        fight = input("Would you like to fight it? y/n ")
-        print()
-
-        if(fight == "Y" or fight == "y"):
-
-          if("Sword" in inventory):
-            broken = random.randrange(5)
-
-            if(broken == 0):
-              print("You kill the goblin with your sword, but in the process, your sword breaks.")
-              inventory.remove("Sword")
-              print("Inventory: ", end = " ")
-              for item in inventory:
-                print(item, end = " ")
-
-            elif(broken == 1):
-              print("You try to kill the goblin with your sword, but it also has a sword and turns ar ound and kills you.")
-              print()
-              tm.sleep(1)
-              gameover()
-              break 
-
-            else:
-              print("You kill the goblin with your sword.")
-              print()
-              tm.sleep(1)
-
-          elif("Sword" not in inventory):
-            print("You try to kill the goblin, but you don't have a sword.")
-            print()
-            tm.sleep(1)
-            print("The goblin kills you.")
-            print()
-            tm.sleep(1)
-            print("Game Over")
-            print()
-            tm.sleep(1)
-            print("Final Inventory: ", end = " ")
-            for item in inventory:
-              print(item,end = " ")
-            print()
-            tm.sleep(1)
-            print("Final Money: ", money)
-            break
-
-        else:
-          print("You run from the goblin, fearing he will kill you.")
+          print("You leave the Legendary Sword there.")
           print()
           tm.sleep(1)
-
-      #what happens if you go south
+    
+    #items specific to direction south
     elif(direction == "s" or direction == "S"):
       print("Traveling south...")
       print()
       tm.sleep(1)
-      find2 = random.randrange(30)
 
-      if(find2 == 0 or find2 == 1):
-        coin = random.randrange(150)
-        print("You found a bag of money.")     
+      if(find < 10):
+        print("You found a crossbow.")
         print()
         tm.sleep(1)
-        grab = input("Do you want to find out how much money it is? y/n ")
+        grab = input("Do you want to add it to your inventory? ")
         print()
 
         if(grab == "y" or grab == "Y"):
-          print("You find ", coin, " coins in the bag and add it to your money.")
+          print("You add the crossbow to your inventory.")
           print()
-          money = money + coin       
-          print("Money: ", money)
+          inventory.append("Crossbow")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
           print()
-          
+          tm.sleep(1)
+
         elif(grab == "n" or grab == "N"):
-          print("You leave the bag of coins there.")
+          print("You leave the crossbow there.")
+          print()
+          tm.sleep(1)
+
+      elif(find == 6):
+        print("YOU FOUND A LEGENDARY CROSSBOW!")
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to add it to your inventory? ")
+        print()
+
+        if(grab == "Y" or grab == "y"):
+          print("You add the Legendary Crossbow to your inventory.")
+          print()
+          inventory.append("Legendary-Crossbow")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
+          print()
+          tm.sleep(1)
+
+    #items specific to direction east
+    elif(direction == "e" or direction == "E"):
+      print("Traveling east...")
+      print()
+      tm.sleep(1)
+
+      if(find < 5):
+        print("You found a spear!")
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to add it to your inventory? ")
+        print()
+
+        if(grab == "y" or grab == "Y"):
+          print("You grab the spear and add it to your inventory.")
+          print()
+          inventory.append("Spear")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
+          print()
+          tm.sleep(1)
+
+        else:
+          print("You leave the spear there.")
+          print()
+          tm.sleep(1)
+
+      elif(find == 6):
+        print("YOU FOUND A LEGENDARY SPEAR!")
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to add it to your inventory? ")
+        print()
+
+        if(grab == "y" or grab == "Y"):
+          print("You grab the Legendary Spear and add it to your inventory.")
+          print()
+          inventory.append("Legendary-Spear")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
+          print()
+          tm.sleep(1)
+
+        else:
+          print("You leave the Legendary Spear there.")
+          print()
+          tm.sleep(1)
+
+    #items specific to direction west
+    elif(direction == "w" or direction == "W"):
+      print("Traveling west...")
+      print()
+      tm.sleep(1)
+
+      if(find < 5):
+        print("You found a bow.")
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to add it to your inventory? ")
+        print()
+
+        if(grab == "y" or grab == "Y"):
+          print("You grab the bow and add it to your inventory.")
+          print()
+          inventory.append("Bow")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
+          print()
+          tm.sleep(1)
+
+        else:
+          print("You leave the bow there.")
+          print()
+          tm.sleep(1)
+
+      elif(find == 6):
+        print("YOU FOUND A LEGENDARY BOW!")
+        print()
+        tm.sleep(1)
+        grab = input("Do you want to add it to your inventory? ")
+        print()
+
+        if(grab == "Y" or grab == "y"):
+          print("You grab the Legendary Bow and add it to your inventory.")
+          print()
+          inventory.append("Legendary-Bow")
+          tm.sleep(1)
+          print("Inventory: ")
+          for item in inventory:
+            print("   ",item)
+          print()
+          tm.sleep(1)
+          
+
+    #random money bag find
+    elif(find >= 7 and find <= 16):
+      print("You found a bag of money.")
+      tm.sleep(1)
+      print()
+      grab = input("Do you want to find out how much money it is? ")
+      print()
+      tm.sleep(1)
+
+      if(grab == "y" or grab == "Y"):
+        coin = random.randrange(250)
+        print("You find ", coin, " coins in the bag.")
+        print()
+        tm.sleep(1)
+        money = money + coin
+        print("Purse: ", money)
+        print()
+        tm.sleep(1)
+
+      else:
+        print("You leave the bag of money there.")
+        print()
+        tm.sleep(1)
+
+    elif(find >= 17 and find <= 21):
+      print("You leave the dungeon.")
+      print()
+      tm.sleep(1)
+      gameover()
+      break
+
+    #random goblin encounter
+    elif(find >= 22 and find <= 26):
+      print("You find a goblin.")
+      print()
+      tm.sleep(1)
+      fight = input("Would you like to fight it? y/n ")
+      print()
+
+      if(fight == "Y" or fight == "y"):
+
+        if("Legendary-Sword" in inventory):
+          print("You pull out your Legendary Sword and immediately kill the goblin.")
+          print()
+          tm.sleep(1)
+          bag = random.randrange(5)
+
+          if(bag == 0):
+            print("The goblin had a bag of money with it.")
+            print()
+            tm.sleep(1)
+            grab = input("Do you want to see how much money it is? ")
+            print()
+            
+            if(grab == "y" or grab == "Y"):
+              coin = random.randrange(500)
+              print("You found ", coin, " in the bag adn add it to your purse.")
+              print()
+              money = money + coin
+              tm.sleep(1)
+              print("Purse: ", money)
+
+            else:
+              print("You leave the bag of money there.")
+
+        elif("Legendary-Spear" in inventory):
+          print("You pull out your Legendary Spear and immediately kill the goblin.")
+          print()
+          tm.sleep(1)
+          bag = random.randrange(5)
+
+          if(bag == 0):
+            print("The goblin had a bag of money with it.")
+            print()
+            tm.sleep(1)
+            grab = input("Do you want to see how much money it is? ")
+            print()
+            
+            if(grab == "y" or grab == "Y"):
+              coin = random.randrange(500)
+              print("You found ", coin, " in the bag adn add it to your purse.")
+              print()
+              money = money + coin
+              tm.sleep(1)
+              print("Purse: ", money)
+
+            else:
+              print("You leave the bag of money there.")
+
+
+        elif("Sword" in inventory):
+          broken = random.randrange(5)
+
+          if(broken == 0):
+            print("You kill the goblin with your sword, but in the process, your sword breaks.")
+            inventory.remove("Sword")
+            print("Inventory: ")
+            for item in inventory:
+              print(item)
+            print()
+            tm.sleep(1)
+
+          elif(broken == 1):
+            print("You try to kill the goblin with your sword, but it also has a sword and turns ar ound and kills you.")
+            print()
+            tm.sleep(1)
+            gameover()
+            break 
+
+          else:
+            print("You kill the goblin with your sword.")
+            print()
+            tm.sleep(1)
+            bag = random.randrange(5)
+
+            if(bag == 0):
+              print("The goblin had a bag of money with it.")
+              print()
+              tm.sleep(1)
+              grab = input("Do you want to see how much money it is?")
+              print()
+
+              if(grab == "Y" or grab == "y"):
+                coin = random.randrange(300)
+                print("You found ", coin, " coins in the bag and add it to your purse.")
+                print()
+                money = money + coin
+                tm.sleep(1)
+                print("Purse: ", money)
+                print()
+                tm.sleep(1)
+
+              else:
+                print("You leave the bag of money there.")
+                print()
+                tm.sleep(1)
+
+        elif("Spear" in inventory):
+          broken = random.randrange(5)
+
+          if(broken == 0):
+            print("You kill the goblin with your spear, but in the process, your spear breaks.")
+            inventory.remove("Spear")
+            print("Inventory: ")
+            for item in inventory:
+              print(item)
+            print()
+            tm.sleep(1)
+
+          elif(broken == 1):
+            print("You try to kill the goblin with your spear, but it also has a spear and turns ar ound and kills you.")
+            print()
+            tm.sleep(1)
+            gameover()
+            break 
+
+          else:
+            print("You kill the goblin with your spear.")
+            print()
+            tm.sleep(1)
+            bag = random.randrange(5)
+
+            if(bag == 0):
+              print("The goblin had a bag of money with it.")
+              print()
+              tm.sleep(1)
+              grab = input("Do you want to see how much money it is?")
+              print()
+
+              if(grab == "Y" or grab == "y"):
+                coin = random.randrange(300)
+                print("You found ", coin, " coins in the bag and add it to your purse.")
+                print()
+                money = money + coin
+                tm.sleep(1)
+                print("Purse: ", money)
+                print()
+                tm.sleep(1)
+
+              else:
+                print("You leave the bag of money there.")
+                print()
+                tm.sleep(1)
+
+        else:
+          print("You try to kill the goblin, but you don't have a weapon.")
+          print()
+          tm.sleep(1)
+          print("The goblin kills you.")
+          print()
+          tm.sleep(1)
+          gameover()
+          break
+
+      else:
+        print("You run from the goblin, fearing he will kill you.")
+        print()
+        tm.sleep(1)
+
+    #random dragon encounter
+    elif(find >= 27 and find <= 29):
+      print("You found a dragon.")
+      print()
+      tm.sleep(1)
+      fight = input("Do you want to try to fight it? ")
+
+      if(fight == "Y" or fight == "y"):
+        
+        if("Legendary-Crossbow" in inventory):
+          print("You pull out your Legendary Crossbow and slay the great dragon instantly.")
+          print()
+          tm.sleep(1)
+          print("You find a dragon scale.")
+          print()
+          tm.sleep(1)
+          grab = input("Do you want to add it to your inventory? ")
+          print()
+
+          if(grab == "y" or grab == "Y"):
+            print("You pick up the dragon scale to save it for later.")
+            print()
+            inventory.append("Dragon-Scale")
+            tm.sleep(1)
+            print("Inventory: ")
+            for item in inventory:
+              print("   ", item)
+            print()
+            tm.sleep(1)
+
+          else:
+            print("You leave the dragon scale there.")
+            print()
+            tm.sleep(1) 
+
+        elif("Legendary-Bow" in inventory):
+          print("You pull out your Legendary Bow and slay the great dragon instantly.")
+          print()
+          tm.sleep(1)
+          print("You find a dragon scale.")
+          print()
+          tm.sleep(1)
+          grab = input("Do you want to add it to your inventory? ")
+          print()
+
+          if(grab == "y" or grab == "Y"):
+            print("You pick up the dragon scale to save it for later.")
+            print()
+            inventory.append("Dragon-Scale")
+            tm.sleep(1)
+            print("Inventory: ")
+            for item in inventory:
+              print(item)
+            print()
+            tm.sleep(1)
+
+          else:
+            print("You leave the dragon scale there.")
+            print()
+            tm.sleep(1) 
+
+        elif("Crossbow" in inventory):
+          broken = random.randrange(3)
+
+          if(broken == 0):
+            print("You pull out your crossbow and shoot the dragon, killing him, but your crossbow breaks in the process.")
+            print()
+            tm.sleep(1)
+            inventory.remove("Crossbow")
+            print("Inventory: ")
+            for item in inventory:
+              print("   ", item)
+            print()
+            tm.sleep(1)
+
+          elif(broken == 1):
+            print("You try to kill the dragon, but he turns around and incinerates you with his fire.")
+            print()
+            tm.sleep(1)
+            print("You died.")
+            print()
+            tm.sleep(1)
+            gameover()
+            break
+
+          else:
+            print("You kill the dragon easily with your crossbow.")
+            print()
+            tm.sleep(1)
+            print("You found a dragon scale.")
+            print()
+            tm.sleep(1)
+            grab = input("Do you want to add it to your inventory? ")
+            print()
+
+            if(grab == "y" or grab == "Y"):
+              print("You grab the dragon scale and put it in your inventory for later.")
+              print()
+              inventory.append("Dragon-Scale")
+              tm.sleep(1)
+              print("Inventory: ")
+              for item in inventory:
+                print("   ", item)
+              print()
+              tm.sleep(1)
+
+            else:
+              print("You leave the dragon scale there.")
+              print()
+              tm.sleep(1)
+
+        elif("Bow" in inventory):
+          broken = random.randrange(3)
+
+          if(broken == 0):
+            print("You pull out your bow and shoot the dragon, killing him, but your bow breaks in the process.")
+            print()
+            tm.sleep(1)
+            inventory.remove("Bow")
+            print("Inventory: ")
+            for item in inventory:
+              print("   ", item)
+            print()
+            tm.sleep(1)
+
+          elif(broken == 1):
+            print("You try to kill the dragon, but he turns around and incinerates you with his fire.")
+            print()
+            tm.sleep(1)
+            print("You died.")
+            print()
+            tm.sleep(1)
+            gameover()
+            break
+
+          else:
+            print("You kill the dragon easily with your bow.")
+            print()
+            tm.sleep(1)
+            print("You found a dragon scale.")
+            print()
+            tm.sleep(1)
+            grab = input("Do you want to add it to your inventory? ")
+            print()
+
+            if(grab == "y" or grab == "Y"):
+              print("You grab the dragon scale and put it in your inventory for later.")
+              print()
+              inventory.append("Dragon-Scale")
+              tm.sleep(1)
+              print("Inventory: ")
+              for item in inventory:
+                print("   ", item)
+              print()
+              tm.sleep(1)
+
+            else:
+              print("You leave the dragon scale there.")
+              print()
+              tm.sleep(1)
+
+        
+
 
 
 game()
