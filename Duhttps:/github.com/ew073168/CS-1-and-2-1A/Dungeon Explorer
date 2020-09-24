@@ -79,7 +79,7 @@ def game():
       tm.sleep(1)
       print("Final Purse: ", money)
 
-    find = random.randrange(4)
+    find = random.randrange(100)
 
     #items specific to direction north
     if(direction == "n" or direction == "N"):
@@ -279,9 +279,19 @@ def game():
           print()
           tm.sleep(1)
           
+    elif(direction == "i" or direction == "I"):
+      print("Inventory: ")
+      for item in inventory:
+        print("   ", item)
+      print()
+      tm.sleep(1)
+      print("Purse: ", money)
+      print()
+      tm.sleep(1)
+      find = 0
 
     #random money bag find
-    elif(find >= 7 and find <= 16):
+    if(find >= 7 and find <= 16):
       print("You found a bag of money.")
       tm.sleep(1)
       print()
@@ -640,7 +650,56 @@ def game():
               print()
               tm.sleep(1)
 
+    #random witch encounter
+    elif(find >= 30 and find <= 32):
+      print("You see a witch in the distance.")
+      print()
+      tm.sleep(1)
+      talk = input("Do you want to try to bargain, try to threaten, or run away? b/t/r ")
+
+      if(talk == "b" or talk == "B"):
+        witch = random.randrange(5)
+        print("You go up to the witch and try to bargain with her.")
+        print()
+        tm.sleep(1)
+
+        if(witch == 0):
+          print("The witch requests a dragon scale.")
+          print()
+          tm.sleep(1)
+          print("If you don't have it, you must give her 100 coins.")
+          print()
+          tm.sleep(1)
+          accept = input("Do you want to give this to her? ")
+          print()
+
+          if(accept == "y" or accept == "Y"):
+            
+            if("Dragon-Scale" in inventory):
+              print("You give the witch a dragon scale, not wanting to cause any trouble.")
+              print()
+              inventory.remove("Dragon-Scale")
+              tm.sleep(1)
+
+            else:
+              print("You do not have a dragon scale, so you give the witch 100 coins.")
+              print()
+              money = money - 100
+              tm.sleep(1)
+              print("Purse: ", coin)
+
+          else:
+            coin = random.randint(100, 250)
+            print("You do not accept the witch's offer, so she curses you and steals ", coin, "coins from you.")
+            print()
+            money = money - coin
+            tm.sleep(1)
         
+        elif(witch == 1):
+          print("The witch says you are a nice person and gives you")
+
+        
+
 
 
 
