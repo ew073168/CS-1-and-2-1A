@@ -80,7 +80,6 @@ def game():
       print("Final Purse: ", money)
 
     find = random.randrange(70)
-    print(find)
 
     #items specific to direction north
     if(direction == "n" or direction == "N"):
