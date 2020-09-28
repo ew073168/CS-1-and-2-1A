@@ -1122,6 +1122,113 @@ def game():
             print()
             tm.sleep(1)         
             
+                       
+    #random trader encounter
+    elif(find >= 41 and find <= 45):
+      print("You encounter a trader down here in the dungeon. ")
+      print()
+      tm.sleep(1)
+      talk = input("Do you want to trade with him? ")
+      print()
+
+      if(talk == "y" or talk == "Y"):
+        print("You go over to the trader.")
+        print()
+        tm.sleep(1)
+        list1 = input("Do you want to see a list of items to sell? ")
+        print()
+
+        if(list1 == "y" or list1 == "Y"):
+          print("List of items to sell: ")
+          print("  #1  Legendary Sword:    500")
+          print("  #2  Legendary Spear:    500")
+          print("  #3  Legendary Crossbow: 500")
+          print("  #4  Legendary Bow:      500")
+          print("  #5  Sword:              75")
+          print("  #6  Spear:              75")
+          print("  #7  Crossbow:           75")
+          print("  #8  Bow:                75")
+          print("  #9  Diamond:            500")
+          print("  #10 Golden Crown:       250")
+          print("  #11 Golden Nugget:      150")
+          print("  #12 Dragon Scale:       200")
+          print()
+          tm.sleep(3)
+         
+          while(True):
+            trade = int(input("Type the number of the item you wish to sell: "))
+            print()
+
+            def trade1(a, b):
+
+              if(a in inventory):
+                print("You trade", a, "for", b, "coins.")
+                print()
+                inventory.remove(a)
+                tm.sleep(1)
+
+              else:
+                print("You do not have that item in your inventory.")
+                print()
+                tm.sleep(1)
+
+            if(trade == 1):
+              trade1("Legendary-Sword", 500)
+              money = money + 500
+
+            elif(trade == 2):
+              trade1("Legendary-Spear", 500)
+              money = money + 500
+
+            elif(trade == 3):
+              trade1("Legendary-Crossbow", 500)
+              money = money + 500
+
+            elif(trade == 4):
+              trade1("Legendary-Bow", 500)
+              money = money + 500
+
+            elif(trade == 5):
+              trade1("Sword", 75)
+              money = money + 75
+
+            elif(trade == 6):
+              trade1("Spear", 75)
+              money = money + 75
+
+            elif(trade == 7):
+              trade1("Crossbow", 75)
+              money = money + 75
+
+            elif(trade == 8):
+              trade1("Bow", 75)
+              money = money + 75
+
+            elif(trade == 9):
+              trade1("Diamond", 500)
+              money = money + 500
+
+            elif(trade == 10):
+              trade1("Golden-Crown", 250)
+              money = money + 250
+
+            elif(trade == 11):
+              trade1("Golden-Ingot", 150)
+              money = money + 150
+
+            elif(trade == 12):
+              trade1("Dragon-Scale", 200)
+              money = money + 200
+
+            cont = input("Do you want to continue trading? ")
+            print()
+
+            if(cont == "n" or cont == "N"):
+              break
+
+
+
+
 
 
 
