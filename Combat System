@@ -1,0 +1,108 @@
+import random
+
+phealth = 20
+cphealth = 20
+
+#regular attack
+def hit(attacker, health):
+  randdamage = random.randint(3,6)
+  print(attacker, " deals ", randdamage, " damage.")
+  print()
+  health -= randdamage
+  return health
+
+#block attack
+def block(a,b):
+  randblock = random.randint(1,3)
+  print(a, " blocks and gains ", randblock, " health.")
+  print()
+  b = b + randblock
+  return b
+
+#super attack
+def super(a,b):
+  randsuper = random.randint(6,9)
+  print(a, " uses super attack and deals ", randsuper, " damage.")
+  print()
+  b = b - randsuper
+  return b
+
+recharge = 0
+cprecharge = 0
+
+while(True):
+
+
+  if(recharge > 0):
+    recharge = recharge - 1
+  
+  if(cprecharge > 0):
+    cprecharge = cprecharge - 1
+
+  #player turn
+
+  print("Player turn:")
+  print()
+
+  fight = input("Do you want to attack, block, or use your super attack? a/b/s ")
+  print()
+
+  if(fight == "a" or fight == "A"):
+    cphealth = hit("Player", cphealth)
+
+  elif(fight == "b" or fight == "B"):
+    phealth = block("Player", phealth)
+
+  elif(fight == "s" or fight == "S"):
+    if(recharge > 0):
+      print("Your recharge is not done yet.")
+      print()
+      print("You cannot play your turn.")
+      print()
+    else:
+      cphealth = super("Player", cphealth)
+      print("Your 3 turn recharge has started.")
+      print()
+      recharge = 3
+
+  else:
+    print("You did not chose a valid option so your turn is forfeit.")
+    print()
+
+  if(cphealth < 1):
+    print("You win")
+    break
+
+  #cpu turn
+  cpfight = random.randrange(5)
+  
+  if(cprecharge > 0):
+    cpfight = random.randrange(2)
+
+  print("Computer turn:")
+  print()
+
+  if(cpfight == 0 or cpfight == 2):
+    print("The computer chose to attack.")
+    print()
+    phealth = hit("Computer", phealth)
+
+  elif(cpfight == 1 or cpfight == 3):
+    print("The computer chose to block.")
+    print()
+    cphealth = block("Computer", cphealth)
+
+  else:
+    print("The computer used its super attack.")
+    print()
+    phealth = super("Computer", phealth)
+    cprecharge = 3
+    
+  print("Player health: ", phealth)
+  print()
+  print("Computer health: ", cphealth)
+  print()
+
+  if(phealth < 1):
+    print("You lose")
+    break
