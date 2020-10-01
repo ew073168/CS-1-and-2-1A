@@ -60,6 +60,7 @@ def game():
   #defining global variables
   inventory = []
   money = 0
+  health = 100
 
   while(True):
     #direction to go
@@ -81,203 +82,62 @@ def game():
 
     find = random.randrange(70)
 
+    def item(a):
+      print("You found a ", a)
+      print()
+      tm.sleep(1)
+      grab = input("Do you want to add it to your inventory? ")
+      print()
+
+      if(grab == "y" or grab == "Y"):
+        print("You add the ", a, " to your inventory.")
+        print()
+        inventory.append(a)
+        tm.sleep(1)
+        print("Inventory: ")
+        for item in inventory:
+          print("   ",item)
+        print()
+        tm.sleep(1)
+
+      else:
+        print("You leave the ", a, " there.")
+        print()
+        tm.sleep(1)
+
+
     #items specific to direction north
     if(direction == "n" or direction == "N"):
-      print("Traveling north...")
-      print()
-      tm.sleep(1)
-
-      if(find < 5):
-        print("You found a sword.")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
-
-        if(grab == "y" or grab == "Y"):
-          print("You add the sword to your inventory.")
-          print()
-          inventory.append("Sword")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-        else:
-          print("You leave the sword there.")
-          print()
-          tm.sleep(1)
+      
+      if(find >= 0 and find <= 5):
+        item("Sword")
 
       elif(find == 6):
-        print("YOU FOUND A LEGENDARY SWORD!")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? y/n ")
-        print()
+        item("Legendary-Sword")
 
-        if(grab == "y" or grab == "Y"):
-          print("You add the Legendary Sword to your inventory.")
-          print()
-          inventory.append("Legendary-Sword")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-        else:
-          print("You leave the Legendary Sword there.")
-          print()
-          tm.sleep(1)
-    
-    #items specific to direction south
     elif(direction == "s" or direction == "S"):
-      print("Traveling south...")
-      print()
-      tm.sleep(1)
 
-      if(find < 10):
-        print("You found a crossbow.")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
-
-        if(grab == "y" or grab == "Y"):
-          print("You add the crossbow to your inventory.")
-          print()
-          inventory.append("Crossbow")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-        else:
-          print("You leave the crossbow there.")
-          print()
-          tm.sleep(1)
+      if(find >= 0 and find <= 5):
+        item("Crossbow")
 
       elif(find == 6):
-        print("YOU FOUND A LEGENDARY CROSSBOW!")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
+        item("Legendary-Crossbow")
 
-        if(grab == "Y" or grab == "y"):
-          print("You add the Legendary Crossbow to your inventory.")
-          print()
-          inventory.append("Legendary-Crossbow")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-    #items specific to direction east
     elif(direction == "e" or direction == "E"):
-      print("Traveling east...")
-      print()
-      tm.sleep(1)
 
-      if(find < 5):
-        print("You found a spear.")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
-
-        if(grab == "y" or grab == "Y"):
-          print("You grab the spear and add it to your inventory.")
-          print()
-          inventory.append("Spear")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-        else:
-          print("You leave the spear there.")
-          print()
-          tm.sleep(1)
+      if(find >= 0 and find <= 5):
+        item("Spear")
 
       elif(find == 6):
-        print("YOU FOUND A LEGENDARY SPEAR!")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
+        item("Legendary-Spear")
 
-        if(grab == "y" or grab == "Y"):
-          print("You grab the Legendary Spear and add it to your inventory.")
-          print()
-          inventory.append("Legendary-Spear")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-        else:
-          print("You leave the Legendary Spear there.")
-          print()
-          tm.sleep(1)
-
-    #items specific to direction west
     elif(direction == "w" or direction == "W"):
-      print("Traveling west...")
-      print()
-      tm.sleep(1)
 
-      if(find < 5):
-        print("You found a bow.")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
-
-        if(grab == "y" or grab == "Y"):
-          print("You grab the bow and add it to your inventory.")
-          print()
-          inventory.append("Bow")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
-
-        else:
-          print("You leave the bow there.")
-          print()
-          tm.sleep(1)
+      if(find >= 0 and find <= 5):
+        item("Bow")
 
       elif(find == 6):
-        print("YOU FOUND A LEGENDARY BOW!")
-        print()
-        tm.sleep(1)
-        grab = input("Do you want to add it to your inventory? ")
-        print()
-
-        if(grab == "Y" or grab == "y"):
-          print("You grab the Legendary Bow and add it to your inventory.")
-          print()
-          inventory.append("Legendary-Bow")
-          tm.sleep(1)
-          print("Inventory: ")
-          for item in inventory:
-            print("   ",item)
-          print()
-          tm.sleep(1)
+        item("Legendary-Bow")
           
     elif(direction == "i" or direction == "I"):
       print("Inventory: ")
@@ -905,8 +765,8 @@ def game():
           print()
           tm.sleep(1)
 
-          if("Legendary-Sword" in inventory):
-            print("You pull out your Legendary Sword and easily kill the troll.")
+          def troll(a):
+            print("You pull out your", a, "and easily kill the troll.")
             print()
             tm.sleep(1)
             print("You now continue to loot the room.")
@@ -975,75 +835,11 @@ def game():
               print()
               tm.sleep(1)
 
+          if("Legendary-Sword" in inventory):
+            troll("Legendary-Sword")
+
           elif("Legendary-Spear" in inventory):
-            print("You pull out your Legendary Spear and easily kill the troll.")
-            print()
-            tm.sleep(1)
-            print("You now continue to loot the room.")
-            print()
-            tm.sleep(1)
-            coin = random.randint(750,1000)
-            print("You first find ", coin, " coins and add it to your money bag.")
-            print()
-            money = money + coin
-            tm.sleep(1)
-            find1 = random.randrange(5)     
-
-            if(find1 == 0):
-              print("Next, you find a large diamond.")
-              print()
-              tm.sleep(1)
-              print("You add it to your inventory.")
-              print()
-              inventory.append("Diamond")
-              tm.sleep(1)
-              print("You then continue on your way.")
-              print()
-              tm.sleep(1)
-
-            elif(find1 == 1):
-              print("You find a golden crown.")
-              print()
-              tm.sleep(1)
-              print("You add it to your inventory.")
-              print()
-              inventory.append("Golden-Crown")
-              tm.sleep(1)
-              print("You then continue on your way.")
-              print()
-              tm.sleep(1)
-
-            elif(find1 == 2):
-              print("You find a dragon scale.")
-              print()
-              tm.sleep(1)
-              print("You add it to your inventory.")
-              print()
-              inventory.append("Dragon-Scale")
-              tm.sleep(1)
-              print("You then continue on your way.")
-              print()
-              tm.sleep(1)
-
-            elif(find1 == 3):
-              print("You find a Legendary-Bow")
-              print()
-              tm.sleep(1)
-              print("You add it to your inventory.")
-              print()
-              inventory.append("Legendary-Bow")
-              tm.sleep(1)
-              print("You then continue on your way.")
-              print()
-              tm.sleep(1)
-
-            else:
-              print("You find nothing else of value.")
-              print()
-              tm.sleep(1)
-              print("You then continue on your way.")
-              print()
-              tm.sleep(1)         
+            troll("Legendary-Spear")
             
           elif("Sword" in inventory or "Spear" in inventory):
             print("You do not have a Legendary Weapon, so you have no chance against the troll.")
@@ -1122,7 +918,6 @@ def game():
             print()
             tm.sleep(1)         
             
-                       
     #random trader encounter
     elif(find >= 41 and find <= 45):
       print("You encounter a trader down here in the dungeon. ")
@@ -1225,13 +1020,6 @@ def game():
 
             if(cont == "n" or cont == "N"):
               break
-
-
-
-
-
-
-
 
 
 game()
