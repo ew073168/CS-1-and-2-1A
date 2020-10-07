@@ -1,0 +1,75 @@
+import random
+import time as tm
+
+money = 0
+
+def fight():
+  
+def treasure():
+  print("You found a treasure chest.")
+  print()
+  tm.sleep(1)
+  open = input("Do you want to open it? ")
+  print()
+
+  if(open == "y" or open == "Y"):
+    coin = random.randint(50,200)
+    print("You found",coin,"coins in the chest.")
+    print()
+    tm.sleep(1)
+    return coin
+  
+  else:
+    print("You leave the treasure chest there.")
+
+def monster():
+
+def wall():
+
+def random():
+  randfind = random.randint(1,100)
+  if(randfind >= 1 and randfind <= 20):
+    treasure()
+
+
+
+def room1():
+  random()
+  
+  direction = input("South or East >> ")
+  
+  if(direction == "s" or direction == "S"):
+    room5()
+
+  elif(direction == "e" or direction == "E"):
+    room2()
+
+def room2():
+  direction = input
+def room3():
+
+def room4():
+
+def room5():
+
+def room6():
+
+def room7():
+
+def room8():
+
+def room9():
+
+def room10():
+
+def room 11():
+
+def room 12():
+
+def room13():
+
+def room14():
+
+def room15():
+
+def room16():
