@@ -2,10 +2,130 @@ import random
 import time as tm
 
 money = 0
+health = 100
 
-def fight():
-  
-def treasure():
+found1 = 0
+found2 = 0
+found3 = 0
+found4 = 0
+found5 = 0
+found6 = 0
+found7 = 0
+found8 = 0
+found9 = 0
+found10 = 0
+found11 = 0
+found12 = 0
+found13 = 0
+found14 = 0
+found15 = 0
+found16 = 0
+
+def fight(mons,mhealth,heal):
+  #regular attack
+  def hit(attacker, health):
+    randdamage = random.randint(3,6)
+    print(attacker, " deals ", randdamage, " damage.")
+    print()
+    health -= randdamage
+    return health
+
+  #block attack
+  def heal(a,b):
+    randheal = random.randint(1,3)
+    print(a, "heals and gains", randheal, "health.")
+    print()
+    b = b + randblock
+    return b
+
+  #super attack
+  def super(a,b):
+    randsuper = random.randint(6,9)
+    print(a, " uses super attack and deals ", randsuper, " damage.")
+    print()
+    b = b - randsuper
+    return b
+
+  recharge = 0
+  cprecharge = 0
+
+  while(True):
+
+
+    if(recharge > 0):
+      recharge = recharge - 1
+    
+    if(cprecharge > 0):
+      cprecharge = cprecharge - 1
+
+    #player turn
+
+    print("Player turn:")
+    print()
+
+    fight = input("Do you want to attack, block, or use your super attack? a/b/s ")
+    print()
+
+    if(fight == "a" or fight == "A"):
+      hit("Player", cphealth)
+
+    elif(fight == "b" or fight == "B"):
+      block("Player", phealth)
+
+    elif(fight == "s" or fight == "S"):
+      if(recharge > 0):
+        print("Your recharge is not done yet.")
+        print()
+        print("You cannot play your turn.")
+        print()
+      else:
+        cphealth = super("Player", cphealth)
+        print("Your 3 turn recharge has started.")
+        print()
+        recharge = 3
+
+    else:
+      print("You did not chose a valid option so your turn is forfeit.")
+      print()
+
+    if(cphealth < 1):
+      print("You win")
+      break
+
+    #monster turn
+    cpfight = random.randrange(5)
+    
+    if(cprecharge > 0):
+      cpfight = random.randrange(2)
+
+    print("Computer turn:")
+    print()
+
+    if(cpfight == 0 or cpfight == 2):
+      print("The computer chose to attack.")
+      print()
+      phealth = hit("Computer", phealth)
+
+    elif(cpfight == 1 or cpfight == 3):
+      print("The computer chose to block.")
+      print()
+      cphealth = block("Computer", cphealth)
+
+    else:
+      print("The computer used its super attack.")
+      print()
+      phealth = super("Computer", phealth)
+      cprecharge = 3
+      
+    print("Player health: ", phealth)
+    print()
+    print("Computer health: ", cphealth)
+    print()
+
+    if(phealth < 1):
+      print("You lose")
+      break
+def treasure(m):
   print("You found a treasure chest.")
   print()
   tm.sleep(1)
@@ -17,26 +137,60 @@ def treasure():
     print("You found",coin,"coins in the chest.")
     print()
     tm.sleep(1)
-    return coin
-  
+    m += coin
+    return m
+    
   else:
     print("You leave the treasure chest there.")
+    print()
+    tm.sleep(1)
 
 def monster():
+  mon = random.randrange(5)
+  if(mon == 0):
+    monst = "Ogre"
+    mheal = 30
+  elif(mon == 1):
+    monst = "Goblin"
+    mheal = 20
+  elif(mon == 2):
+    monst = "Dragon"
+    mheal = 50
+  elif(mon == 3):
+    monst = "Troll"
+    mheal = 40
+  else:
+    monst = "Zombie"
+    mheal = 20
+
+  print("You find a",monst,".")
+  print()
+  tm.sleep(1)
+  fight(monst,mheal)
 
 def wall():
+  print("This room is blocked, you cannot enter it.")
+  print()
+  tm.sleep(1)
 
-def random():
+def nothing():
+  print("You found nothing in this room.")
+  print()
+  tm.sleep(1)
+
+def random(mn,mo):
   randfind = random.randint(1,100)
-  if(randfind >= 1 and randfind <= 20):
-    treasure()
-
-
+  if(randfind >= 1 and randfind <= 10):
+    treasure(mn)
+  elif(randfind >= 11 and randfind <= 20):
+    monster(mo)
+  elif(randfind >= 21 and randfind <= 30):
+    wall()
+  else:
+    print("You found nothing here.")
 
 def room1():
-  random()
-  
-  direction = input("South or East >> ")
+  direction = input("South or East? >> ")
   
   if(direction == "s" or direction == "S"):
     room5()
@@ -45,31 +199,32 @@ def room1():
     room2()
 
 def room2():
-  direction = input
+  direction = input("South, East, or West? >> ")
 def room3():
-
+  direction = input("South, East, or West? >> ")
 def room4():
-
+  direction = input("South or West? >> ")
 def room5():
-
+  direction = input("North, South, or East? >> ")
 def room6():
-
+  direction = input("North, South, East, or West? >> ")
 def room7():
-
+  direction = input("North, South, East, or West? >> ")
 def room8():
-
+  direction = input("North, South, or West? >> ")
 def room9():
-
+  direction = input("North, South, or East? >> ")
 def room10():
-
-def room 11():
-
-def room 12():
-
+  direction = input("North, South, East, or West? >> ")
+def room11():
+  direction = input("North, South, East, or West? >> ")
+def room12():
+  direction = input("North, South, or West? >> ")
 def room13():
-
+  direction = input("North or East? >> ")
 def room14():
-
+  direction = input("North, East, or West? >> ")
 def room15():
-
+  direction = input("North, East, or West? >> ")
 def room16():
+  direction = input("North or West? >> ")
