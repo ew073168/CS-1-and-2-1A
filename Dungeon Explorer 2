@@ -4,32 +4,66 @@ import time as tm
 money = 0
 health = 100
 
-found1 = 0
-found2 = 0
-found3 = 0
-found4 = 0
-found5 = 0
-found6 = 0
-found7 = 0
-found8 = 0
-found9 = 0
-found10 = 0
-found11 = 0
-found12 = 0
-found13 = 0
-found14 = 0
-found15 = 0
-found16 = 0
+found = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
+#end game function
 def gameover():
   print("Final Money:",money)
   print()
 
+#fight function
 def fight(monster,mhealth):
   global health
   global money
 
-def treasure(m):
+  while(True):
+    #player turn
+    attack = input("Do you want to attack or heal? ")
+    print()
+
+    if(attack == "a" or attack == "A"):
+      damage = random.randint(20,25)
+      print("You attack the",monster,", dealing",damage,"damage.")
+      print()
+      mhealth -= damage
+      tm.sleep(1)
+
+      if(mhealth <= 0):
+        coin = random.randint(100,200)
+        print("You killed the monster and gained",coin,"coins.")
+        print()
+        money += coin
+        tm.sleep(1)
+        break
+
+    elif(attack == "h" or attack == "H"):
+      heal = random.randint(10,15)
+      print("You heal",heal,"health.")
+      print()
+      health += heal
+
+    else:
+      print("You did not choose a valid option, so your turn is forfeit.")
+      print()
+      tm.sleep(1)
+
+    #monster turn
+    if(mhealth > 0):
+      damage = random.randint(8,12)
+      print(monster,"dealt",damage,"damage.")
+      print()
+      health -= damage
+      tm.sleep(1)
+
+      if(health <= 0):
+        print("You died.")
+        print()
+        tm.sleep(1)
+        gameover()
+        break
+
+def treasure():
+  global money
   print("You found a treasure chest.")
   print()
   tm.sleep(1)
@@ -41,9 +75,8 @@ def treasure(m):
     print("You found",coin,"coins in the chest.")
     print()
     tm.sleep(1)
-    m += coin
-    return m
-    
+    money += coin
+
   else:
     print("You leave the treasure chest there.")
     print()
@@ -70,75 +103,293 @@ def monster():
   print("You find a",monst,".")
   print()
   tm.sleep(1)
-  fight(monster,mhealth)
+  fight(monst,mhealth)
 
-def wall():
-  print("This room is blocked, you cannot enter it.")
-  print()
-  tm.sleep(1)
-
-def nothing():
-  print("You found nothing in this room.")
-  print()
-  tm.sleep(1)
-
-def randfunc(mn,mo):
+def randfunc():
   randfind = random.randint(1,100)
   if(randfind >= 1 and randfind <= 10):
-    treasure(mn)
-  elif(randfind >= 11 and randfind <= 20):
-    monster(mo)
-  elif(randfind >= 21 and randfind <= 30):
-    wall()
+    treasure()
+  elif(randfind >= 26 and randfind <= 40):
+    monster()
   else:
     print("You found nothing here.")
-
+    print()
 
 #rooms
 def room1():
-  found1 = 1
-
+  found[0] = 1
   direction = input("South or East? >> ")
-  
+  print()
   if(direction == "s" or direction == "S"):
     room5()
-
   elif(direction == "e" or direction == "E"):
     room2()
-
   else:
     print("Choose a valid option.")
     print()
-    tm.sleep(1)
     room1()
 
 def room2():
+  if(found[1] == 0):
+    randfunc()
+  found[1] = 1
   direction = input("South, East, or West? >> ")
+  print()
+  if(direction == "s" or direction == "S"):
+    room6()
+  elif(direction == "e" or direction == "E"):
+    room3()
+  elif(direction == "w" or direction == "W"):
+    room1()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room2()
+
 def room3():
+  if(found[2] == 0):
+    randfunc()
+  found[2] = 1
   direction = input("South, East, or West? >> ")
+  print()
+  if(direction == "s" or direction == "S"):
+    room7()
+  elif(direction == "e" or direction == "E"):
+    room4()
+  elif(direction == "w" or direction == "W"):
+    room2()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room3()
+
 def room4():
+  if(found[3] == 0):
+    randfunc()
+  found[3] = 1
   direction = input("South or West? >> ")
+  print()
+  if(direction == "s" or direction == "S"):
+    room8()
+  elif(direction == "w" or direction == "W"):
+    room3()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room4()
+ 
 def room5():
+  if(found[4] == 0):
+    randfunc()
+  found[4] = 1
   direction = input("North, South, or East? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room1()
+  elif(direction == "s" or direction == "S"):
+    room9()
+  elif(direction == "e" or direction == "E"):
+    room6()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room5()
+ 
 def room6():
+  if(found[5] == 0):
+    randfunc()
+  found[5] = 1
   direction = input("North, South, East, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room2()
+  elif(direction == "s" or direction == "S"):
+    room10()
+  elif(direction == "e" or direction == "E"):
+    room7()
+  elif(direction == "w" or direction == "W"):
+    room5()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room6()
+
 def room7():
+  if(found[6] == 0):
+    randfunc()
+  found[6] = 1
   direction = input("North, South, East, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room3()
+  elif(direction == "s" or direction == "S"):
+    room11()
+  elif(direction == "e" or direction == "E"):
+    room8()
+  elif(direction == "w" or direction == "W"):
+    room6()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room7()
+
 def room8():
+  if(found[7] == 0):
+    randfunc()
+  found[7] = 1
   direction = input("North, South, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room4()
+  elif(direction == "s" or direction == "S"):
+    room12()
+  elif(direction == "w" or direction == "W"):
+    room7()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room8()
+
 def room9():
+  if(found[8] == 0):
+    randfunc()
+  found[8] = 1
   direction = input("North, South, or East? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room5()
+  elif(direction == "s" or direction == "S"):
+    room13()
+  elif(direction == "e" or direction == "E"):
+    room10()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room9()
+
 def room10():
+  if(found[9] == 0):
+    randfunc()
+  found[9] = 1
   direction = input("North, South, East, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room6()
+  elif(direction == "s" or direction == "S"):
+    room14()
+  elif(direction == "e" or direction == "E"):
+    room11()
+  elif(direction == "w" or direction == "W"):
+    room9()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room10()
+
 def room11():
+  if(found[10] == 0):
+    randfunc()
   direction = input("North, South, East, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room7()
+  elif(direction == "s" or direction == "S"):
+    room15()
+  elif(direction == "e" or direction == "E"):
+    room12()
+  elif(direction == "w" or direction == "W"):
+    room10()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room7()
+
 def room12():
+  if(found[11] == 0):
+    randfunc()
+  found[11] = 1
   direction = input("North, South, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room8()
+  elif(direction == "s" or direction == "S"):
+    room16()
+  elif(direction == "w" or direction == "W"):
+    room11()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room12()
+
+
 def room13():
+  if(found[12] == 0):
+    randfunc()
+  found[12] = 1
   direction = input("North or East? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room9()
+  elif(direction == "e" or direction == "E"):
+    room14()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room13()
+
+
 def room14():
+  if(found[13] == 0):
+    randfunc()
+  found[13] = 1
   direction = input("North, East, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room10()
+  elif(direction == "e" or direction == "E"):
+    room15()
+  elif(direction == "w" or direction == "W"):
+    room13()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room14()
+
+
 def room15():
+  if(found[14] == 0):
+    randfunc()
+  found[14] = 1
   direction = input("North, East, or West? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room11()
+  elif(direction == "e" or direction == "E"):
+    room16()
+  elif(direction == "w" or direction == "W"):
+    room14()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room15()
+
 def room16():
-  direction = input("North or West? >> ")
+  if(found[15] == 0):
+    randfunc()
+  found[15] = 1
+  direction = input("North, West, or Continue? >> ")
+  print()
+  if(direction == "n" or direction == "N"):
+    room12()
+  elif(direction == "w" or direction == "W"):
+    room15()
+  elif(direction == "c" or direction == "C"):
+    print("Entering a new level...")
+    print()
+  else:
+    print("Choose a valid option, try again.")
+    print()
+    room16()
+
+while(health > 0):
+  room1()
