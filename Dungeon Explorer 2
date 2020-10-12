@@ -58,8 +58,7 @@ def fight(monster,mhealth):
       if(health <= 0):
         print("You died.")
         print()
-        tm.sleep(1)
-        gameover()
+        return 1
         break
 
 def treasure():
@@ -392,4 +391,7 @@ def room16():
     room16()
 
 while(health > 0):
+  found = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   room1()
+
+gameover()
