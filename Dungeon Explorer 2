@@ -117,278 +117,292 @@ def randfunc():
 #rooms
 def room1():
   found[0] = 1
-  direction = input("South or East? >> ")
-  print()
-  if(direction == "s" or direction == "S"):
-    room5()
-  elif(direction == "e" or direction == "E"):
-    room2()
-  else:
-    print("Choose a valid option.")
+  if(health > 0):
+    direction = input("South or East? >> ")
     print()
-    room1()
+    if(direction == "s" or direction == "S"):
+      room5()
+    elif(direction == "e" or direction == "E"):
+      room2()
+    else:
+      print("Choose a valid option.")
+      print()
+      room1()
 
 def room2():
   if(found[1] == 0):
     randfunc()
   found[1] = 1
-  direction = input("South, East, or West? >> ")
-  print()
-  if(direction == "s" or direction == "S"):
-    room6()
-  elif(direction == "e" or direction == "E"):
-    room3()
-  elif(direction == "w" or direction == "W"):
-    room1()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("South, East, or West? >> ")
     print()
-    room2()
+    if(direction == "s" or direction == "S"):
+      room6()
+    elif(direction == "e" or direction == "E"):
+      room3()
+    elif(direction == "w" or direction == "W"):
+      room1()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room2()
 
 def room3():
   if(found[2] == 0):
     randfunc()
   found[2] = 1
-  direction = input("South, East, or West? >> ")
-  print()
-  if(direction == "s" or direction == "S"):
-    room7()
-  elif(direction == "e" or direction == "E"):
-    room4()
-  elif(direction == "w" or direction == "W"):
-    room2()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("South, East, or West? >> ")
     print()
-    room3()
+    if(direction == "s" or direction == "S"):
+      room7()
+    elif(direction == "e" or direction == "E"):
+      room4()
+    elif(direction == "w" or direction == "W"):
+      room2()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room3()
 
 def room4():
   if(found[3] == 0):
     randfunc()
   found[3] = 1
-  direction = input("South or West? >> ")
-  print()
-  if(direction == "s" or direction == "S"):
-    room8()
-  elif(direction == "w" or direction == "W"):
-    room3()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("South or West? >> ")
     print()
-    room4()
+    if(direction == "s" or direction == "S"):
+      room8()
+    elif(direction == "w" or direction == "W"):
+      room3()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room4()
  
 def room5():
   if(found[4] == 0):
     randfunc()
   found[4] = 1
-  direction = input("North, South, or East? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room1()
-  elif(direction == "s" or direction == "S"):
-    room9()
-  elif(direction == "e" or direction == "E"):
-    room6()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, or East? >> ")
     print()
-    room5()
+    if(direction == "n" or direction == "N"):
+      room1()
+    elif(direction == "s" or direction == "S"):
+      room9()
+    elif(direction == "e" or direction == "E"):
+      room6()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room5()
  
 def room6():
   if(found[5] == 0):
     randfunc()
   found[5] = 1
-  direction = input("North, South, East, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room2()
-  elif(direction == "s" or direction == "S"):
-    room10()
-  elif(direction == "e" or direction == "E"):
-    room7()
-  elif(direction == "w" or direction == "W"):
-    room5()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, East, or West? >> ")
     print()
-    room6()
+    if(direction == "n" or direction == "N"):
+      room2()
+    elif(direction == "s" or direction == "S"):
+      room10()
+    elif(direction == "e" or direction == "E"):
+      room7()
+    elif(direction == "w" or direction == "W"):
+      room5()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room6()
 
 def room7():
   if(found[6] == 0):
     randfunc()
   found[6] = 1
-  direction = input("North, South, East, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room3()
-  elif(direction == "s" or direction == "S"):
-    room11()
-  elif(direction == "e" or direction == "E"):
-    room8()
-  elif(direction == "w" or direction == "W"):
-    room6()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, East, or West? >> ")
     print()
-    room7()
+    if(direction == "n" or direction == "N"):
+      room3()
+    elif(direction == "s" or direction == "S"):
+      room11()
+    elif(direction == "e" or direction == "E"):
+      room8()
+    elif(direction == "w" or direction == "W"):
+      room6()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room7()
 
 def room8():
   if(found[7] == 0):
     randfunc()
   found[7] = 1
-  direction = input("North, South, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room4()
-  elif(direction == "s" or direction == "S"):
-    room12()
-  elif(direction == "w" or direction == "W"):
-    room7()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, or West? >> ")
     print()
-    room8()
+    if(direction == "n" or direction == "N"):
+      room4()
+    elif(direction == "s" or direction == "S"):
+      room12()
+    elif(direction == "w" or direction == "W"):
+      room7()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room8()
 
 def room9():
   if(found[8] == 0):
     randfunc()
   found[8] = 1
-  direction = input("North, South, or East? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room5()
-  elif(direction == "s" or direction == "S"):
-    room13()
-  elif(direction == "e" or direction == "E"):
-    room10()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, or East? >> ")
     print()
-    room9()
+    if(direction == "n" or direction == "N"):
+      room5()
+    elif(direction == "s" or direction == "S"):
+      room13()
+    elif(direction == "e" or direction == "E"):
+      room10()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room9()
 
 def room10():
   if(found[9] == 0):
     randfunc()
   found[9] = 1
-  direction = input("North, South, East, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room6()
-  elif(direction == "s" or direction == "S"):
-    room14()
-  elif(direction == "e" or direction == "E"):
-    room11()
-  elif(direction == "w" or direction == "W"):
-    room9()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, East, or West? >> ")
     print()
-    room10()
+    if(direction == "n" or direction == "N"):
+      room6()
+    elif(direction == "s" or direction == "S"):
+      room14()
+    elif(direction == "e" or direction == "E"):
+      room11()
+    elif(direction == "w" or direction == "W"):
+      room9()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room10()
 
 def room11():
   if(found[10] == 0):
     randfunc()
-  direction = input("North, South, East, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room7()
-  elif(direction == "s" or direction == "S"):
-    room15()
-  elif(direction == "e" or direction == "E"):
-    room12()
-  elif(direction == "w" or direction == "W"):
-    room10()
-  else:
-    print("Choose a valid option, try again.")
+  found[10] = 1
+  if(health > 0):
+    direction = input("North, South, East, or West? >> ")
     print()
-    room7()
+    if(direction == "n" or direction == "N"):
+      room7()
+    elif(direction == "s" or direction == "S"):
+      room15()
+    elif(direction == "e" or direction == "E"):
+      room12()
+    elif(direction == "w" or direction == "W"):
+      room10()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room11()
 
 def room12():
   if(found[11] == 0):
     randfunc()
   found[11] = 1
-  direction = input("North, South, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room8()
-  elif(direction == "s" or direction == "S"):
-    room16()
-  elif(direction == "w" or direction == "W"):
-    room11()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, South, or West? >> ")
     print()
-    room12()
-
+    if(direction == "n" or direction == "N"):
+      room8()
+    elif(direction == "s" or direction == "S"):
+      room16()
+    elif(direction == "w" or direction == "W"):
+      room11()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room12()
 
 def room13():
   if(found[12] == 0):
     randfunc()
   found[12] = 1
-  direction = input("North or East? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room9()
-  elif(direction == "e" or direction == "E"):
-    room14()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North or East? >> ")
     print()
-    room13()
-
+    if(direction == "n" or direction == "N"):
+      room9()
+    elif(direction == "e" or direction == "E"):
+      room14()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room13()
 
 def room14():
   if(found[13] == 0):
     randfunc()
   found[13] = 1
-  direction = input("North, East, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room10()
-  elif(direction == "e" or direction == "E"):
-    room15()
-  elif(direction == "w" or direction == "W"):
-    room13()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, East, or West? >> ")
     print()
-    room14()
-
+    if(direction == "n" or direction == "N"):
+      room10()
+    elif(direction == "e" or direction == "E"):
+      room15()
+    elif(direction == "w" or direction == "W"):
+      room13()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room14()
 
 def room15():
   if(found[14] == 0):
     randfunc()
   found[14] = 1
-  direction = input("North, East, or West? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room11()
-  elif(direction == "e" or direction == "E"):
-    room16()
-  elif(direction == "w" or direction == "W"):
-    room14()
-  else:
-    print("Choose a valid option, try again.")
+  if(health > 0):
+    direction = input("North, East, or West? >> ")
     print()
-    room15()
+    if(direction == "n" or direction == "N"):
+      room11()
+    elif(direction == "e" or direction == "E"):
+      room16()
+    elif(direction == "w" or direction == "W"):
+      room14()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room15()
 
 def room16():
   if(found[15] == 0):
     randfunc()
   found[15] = 1
-  direction = input("North, West, or Continue? >> ")
-  print()
-  if(direction == "n" or direction == "N"):
-    room12()
-  elif(direction == "w" or direction == "W"):
-    room15()
-  elif(direction == "c" or direction == "C"):
-    print("Entering a new level...")
+  if(health > 0):
+    direction = input("North, West, or Continue? >> ")
     print()
-  else:
-    print("Choose a valid option, try again.")
-    print()
-    room16()
+    if(direction == "n" or direction == "N"):
+      room12()
+    elif(direction == "w" or direction == "W"):
+      room15()
+    elif(direction == "c" or direction == "C"):
+      print("Entering a new level...")
+      print()
+    else:
+      print("Choose a valid option, try again.")
+      print()
+      room16()
 
 while(health > 0):
   found = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
