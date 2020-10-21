@@ -74,11 +74,24 @@ class Enemy(pygame.sprite.Sprite):
 		if self.rect.right < 0:
 			self.kill
 
-			
+
+
+
+
+
+
 player = Player()
 
 
+
+
+ememies = pygame.sprite.Group()
+all_sprites = pygame.sprite.Group()
+all_sprites.add(player)
+
+
 running = True
+
 
 
 while running == True:
@@ -100,8 +113,13 @@ while running == True:
 	player.update(pressed_keys)
 
 
+
+
 	screen.fill((0,0,0))
 
+
+	for entity in all_sprites:
+		screen.blit(entity.surf, entity.rect)
 
 	screen.blit(player.surf, player.rect)
 
