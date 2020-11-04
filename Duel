@@ -1,0 +1,193 @@
+#imports
+import pygame
+import random
+
+from pygame.locals import(
+	RLEACCEL,
+	K_w,
+	K_s,
+	K_a,
+	K_d,
+	K_e,
+	K_DOWN,
+	K_UP,
+	K_LEFT,
+	K_RIGHT,
+	K_SPACE,
+	K_ESCAPE,
+	KEYDOWN,
+	QUIT,
+)
+
+pygame.init()
+
+height = 600
+width = 800
+
+class Player(pygame.sprite.Sprite):
+	def __init__(self):
+		super(Player, self).__init__()
+		self.surf = pygame.image.load('coin.png')
+		self.surf.set_colorkey((0,0,0), RLEACCEL)
+		self.rect = self.surf.get_rect()
+		self.shoot_delay = 250
+		self.last_shot = pygame.time.get_ticks()
+
+	def update(self, pressed_keys):
+		if pressed_keys[K_w]:
+			self.rect.move_ip(0,-1)
+		if pressed_keys[K_s]:
+			self.rect.move_ip(0,1)
+		if pressed_keys[K_a]:
+			self.rect.move_ip(-1,0)
+		if pressed_keys[K_d]:
+			self.rect.move_ip(1,0)
+		if pressed_keys[K_e]:
+			self.shoot()
+
+		if self.rect.left < 0:
+			self.rect.left = 0
+		if self.rect.right > 400:
+			self.rect.right = 400
+		if self.rect.top <= 0:
+			self.rect.top = 0
+		if self.rect.bottom >= height:
+			self.rect.bottom = height
+
+	def shoot(self):
+		now = pygame.time.get_ticks()
+		if now - self.last_shot > self.shoot_delay:
+			self.last_shot = now
+			bullet = Bullet1(self.rect.centerx, self.rect.top)
+			all_sprites.add(bullet)
+			bullets.add(bullet)
+
+
+class Player2(pygame.sprite.Sprite):
+	def __init__(self):
+		super(Player2, self).__init__()
+		self.surf = pygame.image.load('block1.png')
+		self.surf.set_colorkey((0,0,0), RLEACCEL)
+		self.rect = self.surf.get_rect(center=(400,300))
+		self.shoot_delay = 250
+		self.last_shot = pygame.time.get_ticks()
+
+	def update(self, pressed_keys):
+		if pressed_keys[K_UP]:
+			self.rect.move_ip(0,-1)
+		if pressed_keys[K_DOWN]:
+			self.rect.move_ip(0,1)
+		if pressed_keys[K_LEFT]:
+			self.rect.move_ip(-1,0)
+		if pressed_keys[K_RIGHT]:
+			self.rect.move_ip(1,0)
+		if pressed_keys[K_SPACE]:
+			self.shoot()
+
+		if self.rect.left < 400:
+			self.rect.left = 400
+		if self.rect.right > width:
+			self.rect.right = width
+		if self.rect.top <= 0:
+			self.rect.top = 0
+		if self.rect.bottom >= height:
+			self.rect.bottom = height
+
+	def shoot(self):
+		now = pygame.time.get_ticks()
+		if now - self.last_shot > self.shoot_delay:
+			self.last_shot = now
+			bullet2 = Bullet2(self.rect.centerx, self.rect.top)
+			all_sprites.add(bullet2)
+			bullets.add(bullet2)
+
+class Bullet1(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+		self.surf = pygame.Surface((10,10))
+		self.surf.fill((255,0,0))
+
+		self.rect = self.surf.get_rect()
+		self.rect.bottom = y
+		self.rect.centerx = x
+		self.speedy = 3
+
+	def update(self):
+		self.rect.x += self.speedy
+		if self.rect.right >= width:
+			self.kill()
+
+class Bullet2(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+		self.surf = pygame.Surface((10,10))
+		self.surf.fill((0,255,0))
+
+		self.rect = self.surf.get_rect()
+		self.rect.bottom = y
+		self.rect.centerx = x
+		self.speedy = -3
+
+	def update(self):
+		self.rect.x += self.speedy
+		if self.rect.left == 0:
+			self.kill()
+
+			
+screen = pygame.display.set_mode((width,height))
+
+player = Player() 
+
+player2 = Player2()
+
+background_image = pygame.image.load('forest.png').convert()
+background_image = pygame.transform.scale(background_image,(800,700))
+background_image.set_colorkey((0,0,0), RLEACCEL)
+
+all_sprites = pygame.sprite.Group()
+all_sprites.add(player)
+all_sprites.add(player2)
+
+players = pygame.sprite.Group()
+players.add(player)
+players.add(player2)
+
+bullets = pygame.sprite.Group()
+
+running = True
+
+#game loop
+while running == True:
+	for event in pygame.event.get():
+		if event.type == KEYDOWN:
+			if event.key == K_ESCAPE:
+				running = False
+		elif event.type == QUIT:
+			running = False
+
+	pressed_keys = pygame.key.get_pressed()
+
+	player.update(pressed_keys)
+
+	player2.update(pressed_keys)
+
+	bullets.update()
+
+	screen.fill((90,59,227))
+
+	screen.blit(background_image, [0,0])
+
+	#screen.blit(player.surf, player.rect)
+
+	#screen.blit(player2.surf, player2.rect)
+	all_sprites.draw(screen)
+	
+	if pygame.sprite.spritecollideany(player, bullets):
+		running = False
+
+	if pygame.sprite.spritecollideany(player2, bullets):
+		running = False
+
+	pygame.display.flip()
+
+pygame.quit()
