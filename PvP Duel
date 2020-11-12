@@ -27,9 +27,9 @@ width = 800
 class Player(pygame.sprite.Sprite):
 	def __init__(self):
 		super(Player, self).__init__()
-		self.image = pygame.image.load('coin.png')
+		self.image = pygame.image.load('tie.png')
 		self.image.set_colorkey((0,0,0), RLEACCEL)
-		self.rect = self.image.get_rect()
+		self.rect = self.image.get_rect(center=(0,height/2))
 		self.shoot_delay = 1000
 		self.last_shot = pygame.time.get_ticks()
 
@@ -58,7 +58,7 @@ class Player(pygame.sprite.Sprite):
 		now = pygame.time.get_ticks()
 		if now - self.last_shot > self.shoot_delay:
 			self.last_shot = now
-			bullet = Bullet1(self.rect.right+10, self.rect.centery)
+			bullet = Bullet1(self.rect.right+10, self.rect.centery+16)
 			all_sprites.add(bullet)
 			bullets.add(bullet)
 
@@ -66,9 +66,9 @@ class Player(pygame.sprite.Sprite):
 class Player2(pygame.sprite.Sprite):
 	def __init__(self):
 		super(Player2, self).__init__()
-		self.image = pygame.image.load('block1.png')
+		self.image = pygame.image.load('x-wing.png')
 		self.image.set_colorkey((0,0,0), RLEACCEL)
-		self.rect = self.image.get_rect(center=(400,0))
+		self.rect = self.image.get_rect(center=(width,height/2))
 		self.shoot_delay = 1000
 		self.last_shot = pygame.time.get_ticks()
 
@@ -97,15 +97,15 @@ class Player2(pygame.sprite.Sprite):
 		now = pygame.time.get_ticks()
 		if now - self.last_shot > self.shoot_delay:
 			self.last_shot = now
-			bullet2 = Bullet2(self.rect.left-10, self.rect.centery)
+			bullet2 = Bullet2(self.rect.left-10, self.rect.centery+16)
 			all_sprites.add(bullet2)
 			bullets.add(bullet2)
 
 class Bullet1(pygame.sprite.Sprite):
 	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.Surface((10,10))
-		self.image.fill((255,0,0))
+		self.image = pygame.image.load('Bullet1.png')
+		self.image.set_colorkey((0,0,0), RLEACCEL)
 
 		self.rect = self.image.get_rect()
 		self.rect.bottom = y
@@ -120,8 +120,8 @@ class Bullet1(pygame.sprite.Sprite):
 class Bullet2(pygame.sprite.Sprite):
 	def __init__(self, x, y):
 		pygame.sprite.Sprite.__init__(self)
-		self.image = pygame.Surface((10,10))
-		self.image.fill((0,255,0))
+		self.image = pygame.image.load('Bullet2.png')
+		self.image.set_colorkey((0,0,0), RLEACCEL)
 
 		self.rect = self.image.get_rect()
 		self.rect.bottom = y
@@ -133,14 +133,50 @@ class Bullet2(pygame.sprite.Sprite):
 		if self.rect.left == 0:
 			self.kill()
 
-			
+class Explosion(pygame.sprite.Sprite):
+	def __init__(self, x, y):
+		pygame.sprite.Sprite.__init__(self)
+		self.explosions = (
+			pygame.image.load('e1.png').convert(),
+			pygame.image.load('e2.png').convert(),
+			pygame.image.load('e3.png').convert(),
+			pygame.image.load('e4.png').convert(),
+			pygame.image.load('e5.png').convert()
+			)
+		self.explosion_count = 0
+
+		self.image = self.explosions[self.explosion_count]
+		self.image = pygame.transform.scale(self.image, (32, 32))
+		self.image.set_colorkey(0,0,0)
+
+		self.rect = self.image.get_rect()
+		self.rect.bottom = y
+		self.rect.left = x
+
+	def update(self):
+		self.image = self.explosions[self.explosion_count]
+		self.image = pygame.transform.scale(self.image, (32, 32))
+		self.image.set_colorkey(0,0,0)
+
+		self.explosion_count += 1
+		if self.explosion_count > 4:
+			self.kill()
+
+font_name = pygame.font.match_font("arial")
+def draw_text(screen, text, size, x, y):
+	font = pygame.font.Font(font_name, size)
+	text_surface = font.render(text, True, (255,255,255))
+	text_rect = text_surface.get_rect()
+	text_rect.center = (x,y)
+	screen.blit(text_surface, text_rect)
+
 screen = pygame.display.set_mode((width,height))
 
 player = Player() 
 
 player2 = Player2()
 
-background_image = pygame.image.load('forest.png').convert()
+background_image = pygame.image.load('space.jpg')
 background_image = pygame.transform.scale(background_image,(800,700))
 background_image.set_colorkey((0,0,0), RLEACCEL)
 
@@ -157,6 +193,9 @@ bullets = pygame.sprite.Group()
 running = True
 
 clock = pygame.time.Clock()
+
+p1 = False
+p2 = False
 
 #game loop
 while running == True:
@@ -188,11 +227,19 @@ while running == True:
 	all_sprites.draw(screen)
 
 	if pygame.sprite.spritecollideany(player, bullets):
-		running = False
+		p2 = True
+		player.kill()
 
 	if pygame.sprite.spritecollideany(player2, bullets):
-		running = False
+		p1 = True
+		player2.kill()
+
+	if p2 == True:
+		draw_text(screen, "PLAYER2 WON!", 50, 400, 50)
+
+	if p1 == True:
+		draw_text(screen, "PLAYER1 WON!", 50, 400, 50)
 
 	pygame.display.flip()
 
-pygame.quit()
+pygame.quit
