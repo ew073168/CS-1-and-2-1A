@@ -235,9 +235,11 @@ while running == True:
 		player2.kill()
 
 	if p2 == True:
+		screen.fill((0,0,0))
 		draw_text(screen, "PLAYER2 WON!", 50, 400, 50)
 
 	if p1 == True:
+		screen.fill((0,0,0))
 		draw_text(screen, "PLAYER1 WON!", 50, 400, 50)
 
 	pygame.display.flip()
