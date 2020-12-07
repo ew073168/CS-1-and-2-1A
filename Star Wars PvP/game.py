@@ -274,7 +274,7 @@ shields1 = pygame.sprite.Group()
 shields2 = pygame.sprite.Group()
 
 POWERUP =pygame.USEREVENT + 1
-ptime = 1000
+ptime = 18000
 pygame.time.set_timer(POWERUP, ptime)
 
 running = True
@@ -312,21 +312,17 @@ while running == True:
 	bullets2.update()
 	explosions.update()
 	powerups.update()
-	shields1.update(ploc.x, ploc.y)
-	shields2.update(p2loc.x, p2loc.y)
+	shields1.update(ploc.x+10, ploc.y)
+	shields2.update(p2loc.x-10, p2loc.y)
 	screen.blit(background_image, [0,0])
 	screen.blit(death_star, [100,100])
 	all_sprites.draw(screen)
 
 	if pygame.sprite.groupcollide(bullets1, powerups, True, True, collided = None):
 		p1shield = True
-		p1shieldt = 5000
-		start1 = pygame.time.get_ticks()
 
 	if pygame.sprite.groupcollide(bullets2, powerups, True, True, collided = None):
 		p2shield = True
-		p2shieldt = 5000
-		start2 = pygame.time.get_ticks()
 
 	if pygame.sprite.spritecollideany(player, bullets2):
 		p2 = True
@@ -344,23 +340,23 @@ while running == True:
 		explosions.add(explosion)
 		player2.kill()
 
+	if pygame.sprite.groupcollide(shields1, bullets2, True, True, collided = None):
+		print("Hello")
+
+	if pygame.sprite.groupcollide(shields2, bullets1, True, True, collided = None):
+		print("Hello")
+		
 	if p1shield == True:
 		shield1 = Shield(ploc.x, ploc.y, 1)
 		shields1.add(shield1)
 		all_sprites.add(shield1)
-		now = pygame.time.get_ticks()
-		if now - start1 > 5000:
-			shield1.kill()
-			p1shield = False
+		p1shield = False
 
 	if p2shield == True:
 		shield2 = Shield(p2loc.x, p2loc.y, 2)
 		shields2.add(shield2)
 		all_sprites.add(shield2)
-		now = pygame.time.get_ticks()
-		if now - start2 > 5000:
-			shield2.kill()
-			p2shield = False
+		p1shield = False
 
 	if p2 == True:
 		draw_text(screen, "X-WING WON!", 50, 400, 50)
