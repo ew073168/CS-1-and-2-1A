@@ -53,9 +53,9 @@ while running:
 
 		if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEBUTTONUP:
 			if event.button == 4:
-				colornum += 1
+				colornum += 0.5
 			if event.button == 5:
-				colornum -= 1
+				colornum -= 0.5
 		
 		mousepress = pygame.mouse.get_pressed()
 		if mousepress[0] == 1:
