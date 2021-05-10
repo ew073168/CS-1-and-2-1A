@@ -7,7 +7,7 @@ class Shield(pygame.sprite.Sprite):
 			self.image = pygame.image.load(os.path.join(img_folder, 'shield1.png')).convert()
 			self.image.set_colorkey((0,0,0))
 		elif p == 2:
-			self.image = pygame.image.load('shield2.png').convert()
+			self.image = pygame.image.load(os.path,join(img_folder, 'shield2.png')).convert()
 			self.image.set_colorkey((0,0,0))
 
 		self.rect = self.image.get_rect()

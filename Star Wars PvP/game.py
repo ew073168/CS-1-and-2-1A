@@ -1,5 +1,7 @@
 from settings import *
 
+hintshow = False
+
 #game loop
 while running == True:
 
@@ -17,6 +19,15 @@ while running == True:
 		if event.type == KEYDOWN:
 			if event.key == K_ESCAPE:
 				running = False
+			if event.key == K_1:
+				music1()
+			if event.key == K_2:
+				music2()
+			if event.key == K_h:
+				if hintshow == True:
+					hintshow = False
+				elif hintshow == False:
+					hintshow = True
 		elif event.type == QUIT:
 			running = False
 		elif event.type == POWERUP:
@@ -39,6 +50,8 @@ while running == True:
 	screen.blit(background_image, [0,0])
 	screen.blit(death_star, [100,100])
 	all_sprites.draw(screen)
+	if hintshow == True:
+		hint()
 
 	if pygame.sprite.groupcollide(bullets1, powerups, True, True, collided = None):
 		p1shield = True

@@ -12,6 +12,7 @@ from pygame.locals import(
 	K_e,
 	K_q,
 	K_m,
+	K_h,
 	K_1,
 	K_2,
 	K_3,
@@ -29,6 +30,8 @@ from pygame.locals import(
 pygame.init()
 pygame.mixer.init()
 
+from music import *
+
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, "img")
 
@@ -41,6 +44,10 @@ vec = pygame.math.Vector2
 
 p1class = 0
 p2class = 0
+
+def hint():
+	hint = pygame.image.load(os.path.join(img_folder, 'hint.png')).convert()
+	screen.blit(hint, [30, 30])
 
 def show_start_screen():
 	start_screen = pygame.image.load(os.path.join(img_folder, 'start_screen.png')).convert()
@@ -125,6 +132,9 @@ def rebel():
 		screen.blit(rebelWin, (0,0))
 		draw_text(screen, "Victory for the Rebellion", 40, 400, 150, (7, 22, 232))
 		pygame.display.flip()
+		pygame.mixer.music.stop()
+		pygame.mixer.music.load('rebelwin.mp3')
+		pygame.mixer.music.play()
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				pygame.quit()
@@ -137,6 +147,8 @@ def empire():
 		screen.blit(empireWin, (0,0))
 		draw_text(screen, "The Empire prevails", 40, 400, 150, (12, 245, 39))
 		pygame.display.flip()
+		pygame.mixer.music.load('imperial.mp3')
+		pygame.mixer.music.play()
 		for event in pygame.event.get():
 			if event.type == QUIT:
 				pygame.quit()
