@@ -31,24 +31,55 @@ while running == True:
 		elif event.type == QUIT:
 			running = False
 		elif event.type == POWERUP:
-			shield = ShieldPU()
-			all_sprites.add(shield)
-			powerups.add(shield)
+			pu = random.randint(1,3)
+			if pu == 1:
+				shield = ShieldPU()
+				all_sprites.add(shield)
+				powerups.add(shield)
+			if pu == 2:
+				health = Health()
+				all_sprites.add(health)
+				pups.add(health)
+			if pu == 3:
+				ammo = Ammo()
+				all_sprites.add(ammo)
+				ammopups.add(ammo)
 
 	pressed_keys = pygame.key.get_pressed()
 	
 	ploc = player.getcords()
 	p2loc = player2.getcords()
 
-	players.update(pressed_keys)
+	players1.update(pressed_keys)
+	players2.update(pressed_keys)
 	bullets1.update()
 	bullets2.update()
 	explosions.update()
 	powerups.update()
+	pups.update()
+	ammopups.update()
 	shields1.update(ploc.x+10, ploc.y)
 	shields2.update(p2loc.x-10, p2loc.y)
 	screen.blit(background_image, [0,0])
 	screen.blit(death_star, [100,100])
+	if player.health == 1:
+		screen.blit(empireHealth1, [25, 25])
+	if player.health == 2:
+		screen.blit(empireHealth2, [25, 25])
+	if player.health == 3:
+		screen.blit(empireHealth3, [25, 25])
+	if player.health == 4:
+		screen.blit(empireHealth4, [25, 25])
+
+	if player2.health == 1:
+		screen.blit(rebelHealth1, [675, 25])
+	if player2.health == 2:
+		screen.blit(rebelHealth2, [675, 25])
+	if player2.health == 3:
+		screen.blit(rebelHealth3, [675, 25])
+	if player2.health == 4:
+		screen.blit(rebelHealth4, [675, 25])
+
 	all_sprites.draw(screen)
 	if hintshow == True:
 		hint()
@@ -59,20 +90,30 @@ while running == True:
 	if pygame.sprite.groupcollide(bullets2, powerups, True, True, collided = None):
 		p2shield = True
 
-	if pygame.sprite.spritecollideany(player, bullets2):
-		ploc = player.getcords()
-		explosion = Explosion(ploc.x-16, ploc.y+16)
-		all_sprites.add(explosion)
-		explosions.add(explosion)
-		player.kill()
+	if pygame.sprite.groupcollide(bullets1, pups, True, True, collided = None):
+		player.health += 2
+		if player.health > 4:
+			player.health = 4
+
+	if pygame.sprite.groupcollide(bullets2, pups, True, True, collided = None):
+		player2.health += 2
+		if player2.health > 4:
+			player2.health = 4
+
+	if pygame.sprite.groupcollide(bullets1, ammopups, True, True, collided = None):
+		player.magazine += 10
+
+	if pygame.sprite.groupcollide(bullets2, ammopups, True, True, collided = None):
+		player2.magazine += 10
+
+	if pygame.sprite.groupcollide(players1, bullets2, False, True):
+		player.health -=1
+	if player.health == 0:
 		rebel()
 
-	if pygame.sprite.spritecollideany(player2, bullets1):
-		p2loc = player2.getcords()
-		explosion = Explosion(p2loc.x-16, p2loc.y+16)
-		all_sprites.add(explosion)
-		explosions.add(explosion)
-		player2.kill()
+	if pygame.sprite.groupcollide(players2, bullets1, False, True):
+		player2.health -= 1
+	if player2.health == 0:
 		empire()
 
 	if pygame.sprite.groupcollide(shields1, bullets2, True, True, collided = None):

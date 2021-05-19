@@ -27,15 +27,19 @@ class Player(pygame.sprite.Sprite):
 		self.torpedo_delay = 5000
 		self.last_shot = pygame.time.get_ticks()
 		self.last_torpedo = pygame.time.get_ticks()
+		self.health = 4
+		self.magazine = 5
 
 	def shoot(self):
-		now = pygame.time.get_ticks()
-		if now - self.last_shot > self.shoot_delay:
-			self.last_shot = now
-			shoot_sound.play()
-			bullet = Bullet1(self.rect.right+10, self.rect.centery+16)
-			all_sprites.add(bullet)
-			bullets1.add(bullet)
+		if self.magazine > 0:
+			now = pygame.time.get_ticks()
+			if now - self.last_shot > self.shoot_delay:
+				self.last_shot = now
+				shoot_sound.play()
+				bullet = Bullet1(self.rect.right+10, self.rect.centery+16)
+				all_sprites.add(bullet)
+				bullets1.add(bullet)
+				self.magazine -= 1
 	
 	def torpedo(self):
 		now = pygame.time.get_ticks()

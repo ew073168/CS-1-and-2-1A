@@ -162,6 +162,8 @@ all_sprites = pygame.sprite.Group()
 bullets1 = pygame.sprite.Group()
 bullets2 = pygame.sprite.Group()
 powerups = pygame.sprite.Group()
+pups = pygame.sprite.Group()
+ammopups = pygame.sprite.Group()
 explosions = pygame.sprite.Group()
 shields1 = pygame.sprite.Group()
 shields2 = pygame.sprite.Group()
@@ -191,6 +193,33 @@ empireWin = pygame.transform.scale(empireWin, (800, 600))
 rebelWin = pygame.image.load(os.path.join(img_folder, 'deathstarexplosion.jpg')).convert()
 rebelWin = pygame.transform.scale(rebelWin, (800, 600))
 
+rebelHealth1 = pygame.image.load(os.path.join(img_folder, 'xhealth1.png')).convert()
+rebelHealth1 = pygame.transform.scale(rebelHealth1, (100,100))
+rebelHealth1.set_colorkey((0,0,0))
+rebelHealth2 = pygame.image.load(os.path.join(img_folder, 'xhealth2.png')).convert()
+rebelHealth2 = pygame.transform.scale(rebelHealth2, (100,100))
+rebelHealth2.set_colorkey((0,0,0))
+rebelHealth3 = pygame.image.load(os.path.join(img_folder, 'xhealth3.png')).convert()
+rebelHealth3 = pygame.transform.scale(rebelHealth3, (100,100))
+rebelHealth3.set_colorkey((0,0,0))
+rebelHealth4 = pygame.image.load(os.path.join(img_folder, 'xhealth4.png')).convert()
+rebelHealth4 = pygame.transform.scale(rebelHealth4, (100,100))
+rebelHealth4.set_colorkey((0,0,0))
+
+empireHealth1 = pygame.image.load(os.path.join(img_folder, 'tiehealth1.png')).convert()
+empireHealth1 = pygame.transform.scale(empireHealth1, (100, 100))
+empireHealth1.set_colorkey((0,0,0))
+empireHealth2 = pygame.image.load(os.path.join(img_folder, 'tiehealth2.png')).convert()
+empireHealth2 = pygame.transform.scale(empireHealth2, (100, 100))
+empireHealth2.set_colorkey((0,0,0))
+empireHealth3 = pygame.image.load(os.path.join(img_folder, 'tiehealth3.png')).convert()
+empireHealth3 = pygame.transform.scale(empireHealth3, (100, 100))
+empireHealth3.set_colorkey((0,0,0))
+empireHealth4 = pygame.image.load(os.path.join(img_folder, 'tiehealth4.png')).convert()
+empireHealth4 = pygame.transform.scale(empireHealth4, (100, 100))
+empireHealth4.set_colorkey((0,0,0))
+
+
 from bullet1 import Bullet1
 from torpedo1 import Torpedo1
 from player1 import Player
@@ -200,7 +229,8 @@ from player2 import Player2
 from explosion import Explosion
 from shieldpu import ShieldPU
 from shield import Shield
-
+from healthpu import Health
+from ammo import Ammo
 
 player = Player(p1class) 
 player2 = Player2(p2class)
@@ -217,14 +247,15 @@ death_star.set_colorkey((0,0,0), RLEACCEL)
 all_sprites.add(player)
 all_sprites.add(player2)
 
-players = pygame.sprite.Group()
-players.add(player)
-players.add(player2)
+players1 = pygame.sprite.Group()
+players1.add(player)
+players2 = pygame.sprite.Group()
+players2.add(player2)
 
 
 
 POWERUP =pygame.USEREVENT + 1
-ptime = 18000
+ptime = 1000
 pygame.time.set_timer(POWERUP, ptime)
 
 running = True

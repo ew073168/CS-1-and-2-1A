@@ -28,6 +28,8 @@ class Player2(pygame.sprite.Sprite):
 		self.last_shot = pygame.time.get_ticks()
 		self.last_torpedo = pygame.time.get_ticks()
 		self.torpedo_delay = 5000
+		self.health = 4
+		self.magazine = 5
 
 	def update(self, pressed_keys):
 		if pressed_keys[K_UP]:
@@ -54,13 +56,15 @@ class Player2(pygame.sprite.Sprite):
 			self.rect.bottom = height
 
 	def shoot(self):
-		now = pygame.time.get_ticks()
-		if now - self.last_shot > self.shoot_delay:
-			self.last_shot = now
-			shoot_sound.play()
-			bullet2 = Bullet2(self.rect.left-10, self.rect.centery+16)
-			all_sprites.add(bullet2)
-			bullets2.add(bullet2)
+		if self.magazine > 0:
+			now = pygame.time.get_ticks()
+			if now - self.last_shot > self.shoot_delay:
+				self.last_shot = now
+				shoot_sound.play()
+				bullet2 = Bullet2(self.rect.left-10, self.rect.centery+16)
+				all_sprites.add(bullet2)
+				bullets2.add(bullet2)
+				self.magazine -= 1
 
 	def torpedo(self):
 		now = pygame.time.get_ticks()
