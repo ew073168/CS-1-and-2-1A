@@ -28,7 +28,7 @@ class Player(pygame.sprite.Sprite):
 		self.last_shot = pygame.time.get_ticks()
 		self.last_torpedo = pygame.time.get_ticks()
 		self.health = 4
-		self.magazine = 5
+		self.magazine = 10
 
 	def shoot(self):
 		if self.magazine > 0:

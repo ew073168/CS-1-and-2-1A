@@ -255,7 +255,7 @@ players2.add(player2)
 
 
 POWERUP =pygame.USEREVENT + 1
-ptime = 1000
+ptime = 10000
 pygame.time.set_timer(POWERUP, ptime)
 
 running = True

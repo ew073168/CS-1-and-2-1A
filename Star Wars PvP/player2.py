@@ -29,7 +29,7 @@ class Player2(pygame.sprite.Sprite):
 		self.last_torpedo = pygame.time.get_ticks()
 		self.torpedo_delay = 5000
 		self.health = 4
-		self.magazine = 5
+		self.magazine = 10
 
 	def update(self, pressed_keys):
 		if pressed_keys[K_UP]:

@@ -84,26 +84,26 @@ while running == True:
 	if hintshow == True:
 		hint()
 
-	if pygame.sprite.groupcollide(bullets1, powerups, True, True, collided = None):
+	if pygame.sprite.groupcollide(bullets1, powerups, True, True, collided = None) or pygame.sprite.groupcollide(players1, powerups, False, True, collided = None):
 		p1shield = True
 
-	if pygame.sprite.groupcollide(bullets2, powerups, True, True, collided = None):
+	if pygame.sprite.groupcollide(bullets2, powerups, True, True, collided = None) or pygame.sprite.groupcollide(players2, powerups, False, True, collided = None):
 		p2shield = True
 
-	if pygame.sprite.groupcollide(bullets1, pups, True, True, collided = None):
+	if pygame.sprite.groupcollide(bullets1, pups, True, True, collided = None) or  pygame.sprite.groupcollide(players1, pups, False, True, collided = None):
 		player.health += 2
 		if player.health > 4:
 			player.health = 4
 
-	if pygame.sprite.groupcollide(bullets2, pups, True, True, collided = None):
+	if pygame.sprite.groupcollide(bullets2, pups, True, True, collided = None) or  pygame.sprite.groupcollide(players2, pups, False, True, collided = None):
 		player2.health += 2
 		if player2.health > 4:
 			player2.health = 4
 
-	if pygame.sprite.groupcollide(bullets1, ammopups, True, True, collided = None):
+	if pygame.sprite.groupcollide(bullets1, ammopups, True, True, collided = None) or pygame.sprite.groupcollide(players1, ammopups, False, True, collided = None):
 		player.magazine += 10
 
-	if pygame.sprite.groupcollide(bullets2, ammopups, True, True, collided = None):
+	if pygame.sprite.groupcollide(bullets2, ammopups, True, True, collided = None) or pygame.sprite.groupcollide(players2, ammopups, False, True, collided = None):
 		player2.magazine += 10
 
 	if pygame.sprite.groupcollide(players1, bullets2, False, True):
